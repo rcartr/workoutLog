@@ -5,11 +5,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 router.post("/register", async (req, res) => {
-    let { email, password } = req.body.user;
+    let { username, passwordhash } = req.body.user;
     try {
         const User = await UserModel.create({
-            email,
-            password: bcrypt.hashSync(password, 13),
+            username,
+            passwordhash: bcrypt.hashSync(passwordhash, 13),
         });
 
         let token = jwt.sign({id: User.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
     } catch (err) {
         if (err instanceof UniqueConstraintError) {
             res.status(409).json({
-                message: "Email already in use",
+                message: "Username already in use",
             });
         } else {
             res.status(500).json({
@@ -33,20 +33,20 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    let { email, password } = req.body.user;
+    let { username, passwordhash } = req.body.user;
     
     try {
         let loginUser = await UserModel.findOne({
             where: {
-                email: email,
+                username: username,
             },
         });
 
         if (loginUser) {
-            let passwordComparison = await bcrypt.compare(password, loginUser.password);
-            
+            let passwordComparison = await bcrypt.compare(passwordhash, loginUser.passwordhash);
+            console.log(passwordComparison)
             if (passwordComparison) {
-                let token = jwt.sign({id: loginUser.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
+                let token = jwt.sign({id: loginUser.id}, process.env.JWT_SECRET, {expiresIn: "1d"});
 
                 res.status(200).json({
                     user: loginUser,

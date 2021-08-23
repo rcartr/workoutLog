@@ -9,8 +9,8 @@ app.use(Express.json());
 
 const controllers = require("./controllers");
 
-app.use("/user", controllers.usercontroller);
-app.use("/log", controllers.logcontroller);
+app.use("/user", controllers.userController);
+app.use("/log", controllers.logController);
 
 dbConnection.authenticate()
     .then(() => dbConnection.sync()) // =>(force:true)

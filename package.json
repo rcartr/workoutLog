@@ -1,7 +1,7 @@
 {
   "name": "workout-log-server",
   "version": "1.0.0",
-  "description": "Workout log server/client project, introductory assignment for Node, Express, and Sequelize",
+  "description": "Workout log server project, introductory assignment for Node, Express, and Sequelize",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,6 +10,9 @@
   },
   "author": "Richard Carter",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",

@@ -2,19 +2,19 @@ const { DataTypes } = require("sequelize");
 const db = require("../db");
 
 const Log = db.define('log', {
-    title: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    date: {
+    definition: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    entry: {
+    result: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    owner: {
+    owner_id: {
         type: DataTypes.INTEGER
     }
 });
