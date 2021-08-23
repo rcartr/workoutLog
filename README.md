@@ -1,4 +1,4 @@
-####Screenshots of testing the endpoints on the workout log server.
+**Screenshots of testing the endpoints on the workout log server.**
 
 /user/register POST
 ![User register POST](/ss/workoutLog-userRegisterEndpoint.png)
